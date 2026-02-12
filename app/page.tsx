@@ -301,6 +301,10 @@ function GenerateScreen({
   const categories: Array<Exclude<Category, 'All'>> = ['Temples', 'Countryside', 'Cities', 'Coastal', 'Other']
 
   const handleGenerate = async () => {
+    console.log('Generate button clicked')
+    console.log('Prompt:', prompt)
+    console.log('Category:', category)
+
     if (!prompt.trim()) {
       setError('Please enter a description')
       return
@@ -311,24 +315,30 @@ function GenerateScreen({
     setGeneratedImage(null)
 
     try {
+      console.log('Calling AI Agent with:', { prompt, AGENT_ID })
       const result = await callAIAgent(
         prompt,
         AGENT_ID,
         { session_id: `ghibli-session-${Date.now()}` }
       )
+      console.log('AI Agent result:', result)
 
       // Extract image URL from module_outputs (top-level)
+      console.log('Module outputs:', result?.module_outputs)
       const imageUrl = Array.isArray(result?.module_outputs?.artifact_files) && result.module_outputs.artifact_files.length > 0
         ? result.module_outputs.artifact_files[0]?.file_url
         : null
+      console.log('Extracted image URL:', imageUrl)
 
       // Extract metadata from result.response.result
       const metadata = result?.response?.result
+      console.log('Metadata:', metadata)
       const title = metadata?.title ?? 'Untitled'
       const enhanced_prompt = metadata?.enhanced_prompt ?? prompt
       const responseCategory = metadata?.category ?? category
 
       if (!imageUrl) {
+        console.error('No image URL found in result')
         throw new Error('No image was generated')
       }
 
@@ -344,6 +354,7 @@ function GenerateScreen({
 
       setGeneratedImage(newImage)
     } catch (err) {
+      console.error('Error generating image:', err)
       setError(err instanceof Error ? err.message : 'Failed to generate image')
     } finally {
       setIsGenerating(false)
