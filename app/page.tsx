@@ -311,11 +311,11 @@ function GenerateScreen({
     setGeneratedImage(null)
 
     try {
-      const result = await callAIAgent({
-        agentId: AGENT_ID,
-        message: prompt,
-        sessionId: `ghibli-session-${Date.now()}`
-      })
+      const result = await callAIAgent(
+        prompt,
+        AGENT_ID,
+        { session_id: `ghibli-session-${Date.now()}` }
+      )
 
       // Extract image URL from module_outputs (top-level)
       const imageUrl = Array.isArray(result?.module_outputs?.artifact_files) && result.module_outputs.artifact_files.length > 0
