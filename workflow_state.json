@@ -1,0 +1,69 @@
+{
+  "workflow": {
+    "nodes": [
+      {
+        "id": "input_node",
+        "type": "Input",
+        "label": "User Input",
+        "nodeCategory": "input",
+        "position": {
+          "x": 100,
+          "y": 200
+        }
+      },
+      {
+        "id": "ghibli_image_agent",
+        "type": "Agent",
+        "label": "Ghibli Image Generator Agent",
+        "nodeCategory": "agent",
+        "position": {
+          "x": 400,
+          "y": 200
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "input_node",
+        "target": "ghibli_image_agent"
+      }
+    ]
+  },
+  "agents": [
+    {
+      "agent_id": "698e1604b7f596d9c48de34d",
+      "name": "Ghibli Image Generator Agent",
+      "description": "Generates beautiful Studio Ghibli-style artwork of Japanese locations based on user descriptions. Enhances prompts with Ghibli aesthetic elements.",
+      "agent_role": "Expert Ghibli-style image generation specialist",
+      "agent_goal": "Create stunning Studio Ghibli-inspired artwork of Japanese temples, countryside, cities, and coastal scenes",
+      "provider_id": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "tool_configs": [],
+      "managed_agents": [],
+      "image_output_config": {
+        "model": "gemini/gemini-3-pro-image-preview",
+        "credential_id": "lyzr_google"
+      },
+      "voice_config": null,
+      "file_output": false,
+      "response_schema_file": "response_schemas/ghibli_image_generator_agent_response.json",
+      "response_schema": {
+        "title": "string",
+        "enhanced_prompt": "string",
+        "category": "string"
+      },
+      "has_module_outputs": true,
+      "module_outputs_example": {
+        "artifact_files": [
+          {
+            "file_url": "https://example.com/image.png"
+          }
+        ]
+      }
+    }
+  ],
+  "rag_ids": [],
+  "schedules": []
+}

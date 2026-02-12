@@ -1,0 +1,26 @@
+{
+  "agent_name": "Ghibli Image Generator Agent",
+  "agent_id": "698e1604b7f596d9c48de34d",
+  "description": "Generates beautiful Studio Ghibli-style artwork of Japanese locations based on user descriptions. Enhances prompts with Ghibli aesthetic elements.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "title": "string",
+    "enhanced_prompt": "string",
+    "category": "string"
+  },
+  "example_response": {
+    "title": "Brief title capturing the essence of the generated scene",
+    "enhanced_prompt": "The enhanced prompt used for image generation with Ghibli aesthetic elements",
+    "category": "Location category of the generated image"
+  },
+  "has_module_outputs": true,
+  "module_outputs_example": {
+    "artifact_files": [
+      {
+        "file_url": "https://example.com/image.png"
+      }
+    ]
+  }
+}
